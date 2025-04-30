@@ -1,22 +1,44 @@
+import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Checout = () => {
       const service = useLoaderData();
-      const {title, _id, price} = service;
+      const {title, _id, price, img,} = service;
+      const {user} = useContext(AuthContext);
       const handleCheckout = event =>{
             event.preventDefault();
             const form = event.target;
             const name = form.name.value;
             const date = form.date.value;
-            const email = form.email.value;
-            const order = {
+            const email = user?.email;
+            const booking = {
                   customerName : name,
                   email,
+                  img,
                   date,
-                  service:_id,
+                  service: title,
+                  service_id:_id,
                   price: price
             }
-            console.log(order);
+            console.log(booking);
+            fetch('http://localhost:13000/bookings',{
+                  method: 'POST',
+                  headers:{
+                        'content-type' : 'application/json'
+
+                  },
+                  body: JSON.stringify(booking)
+
+            })
+            .then(res => res.json())
+            .then(data =>{
+            console.log(data);
+            if(data.insertedId){
+                  alert('service book successfully')
+            }
+
+            })
 
       }
       return (
@@ -29,7 +51,7 @@ const Checout = () => {
                 
          <div className=" ">
         
-          <input type="text" name="name" className="input w-full" placeholder="Service Name" />
+          <input type="text" name="name" defaultValue={user?.displayName} className="input w-full" placeholder="Service Name" />
           
          </div>
          <div>
@@ -40,7 +62,7 @@ const Checout = () => {
         
           <div>
          
-          <input type="email" name="email" className="input w-full" placeholder="Text here" />
+          <input type="email" name="email" className="input w-full" defaultValue={user?.email} de  placeholder="Text here"  />
           
           </div>
           <div>

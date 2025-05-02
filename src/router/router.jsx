@@ -26,7 +26,7 @@ const router = createBrowserRouter([
             },
             {
               path:'checkout/:id',
-              element:<Checout></Checout>,
+              element:<PrivateRoute><Checout></Checout></PrivateRoute>,
               loader: ({params}) => fetch(`http://localhost:13000/server/${params.id}`)
             },
             {

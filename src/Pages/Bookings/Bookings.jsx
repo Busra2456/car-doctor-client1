@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import BookingRow from "./BookingRow";
 
+
 const Bookings = () => {
       const {user} = useContext(AuthContext);
 
@@ -11,7 +12,13 @@ const Bookings = () => {
       const url = `http://localhost:13000/bookings?email=${user?.email}`;
 
       useEffect(() =>{
-            fetch(url)
+
+            // axios.get(url, {withCredentials:true},{credentials:'include'})
+            // .then(res =>{
+            //       setBookings(res.data)
+            // })
+
+            fetch(url,{credentials:'include'})
             .then(res => res.json())
             .then(data => setBookings(data))
       },[url])
@@ -21,14 +28,14 @@ const Bookings = () => {
                   if(proceed){
                         fetch(`http://localhost:13000/bookings/${id}`, {
                               method: 'DELETE'
-                        })
-                        .then(res =>res.json())
-                        .then(data =>{
-                              console.log(data);
-                              if(data.deletedCount > 0){
-                                    alert('deleted successfully');
-                                    const remaining = bookings.filter(booking => booking._id !== id);
-                                    setBookings(remaining)
+            })
+            .then(res =>res.json())
+            .then(data =>{
+                  console.log(data);
+                  if(data.deletedCount > 0){
+                        alert('deleted successfully');
+                        const remaining = bookings.filter(booking => booking._id !== id);
+                        setBookings(remaining)
                               }
                         })
       

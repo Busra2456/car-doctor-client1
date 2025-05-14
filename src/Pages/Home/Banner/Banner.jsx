@@ -26,6 +26,7 @@ const Banner = () => {
                 <a href="#slide2" className="btn btn-circle">❯</a>
               </div>
             </div>
+            {/* ------------------------------------------------------------- */}
             <div id="slide2" className="carousel-item relative w-full">
             <img
                 src={img2}

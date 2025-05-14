@@ -6,6 +6,7 @@ import SignUp from "../Pages/SignUp/SignUp";
 import Checout from "../Pages/checkout/Checout";
 import Bookings from "../Pages/Bookings/Bookings";
 import PrivateRoute from "./Routers/PrivateRoute";
+import BookService from "../Pages/Bookings/BookService";
 
 const router = createBrowserRouter([
       {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
             {
               path:'/SignUp',
               element:<SignUp></SignUp>
+            },
+            {path:'book/:id',
+              element:<PrivateRoute><BookService></BookService></PrivateRoute>,
+              loader:({params}) => fetch(`https://car-doctor-server-topaz-one.vercel.app/services/${params.id}`)
             },
             {
               path:'checkout/:id',

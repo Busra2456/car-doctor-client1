@@ -4,6 +4,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 
 const Checout = () => {
       const service = useLoaderData();
+      console.log(service)
       const {title, _id, price, img,} = service;
       const {user} = useContext(AuthContext);
       const handleCheckout = event =>{
@@ -62,7 +63,7 @@ const Checout = () => {
         
           <div>
          
-          <input type="email" name="email" className="input w-full" defaultValue={user?.email} de  placeholder="Text here"  />
+          <input type="text" name="email" className="input w-full" defaultValue={user?.email} placeholder="email"  />
           
           </div>
           <div>

@@ -25,10 +25,10 @@ const router = createBrowserRouter([
               path:'/SignUp',
               element:<SignUp></SignUp>
             },
-            {path:'book/:id',
-              element:<PrivateRoute><BookService></BookService></PrivateRoute>,
-              loader:({params}) => fetch(`https://car-doctor-server-topaz-one.vercel.app/services/${params.id}`)
-            },
+            // {path:'book/:id',
+            //   element:<PrivateRoute><BookService></BookService></PrivateRoute>,
+            //   loader:({params}) => fetch(`https://car-doctor-server-topaz-one.vercel.app/services/${params.id}`)
+            // },
             {
               path:'checkout/:id',
               element:<PrivateRoute><Checout></Checout></PrivateRoute>,
